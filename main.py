@@ -1,16 +1,33 @@
-# This is a sample Python script.
+import mysql.connector
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def create_db():
+    mydb = mysql.connector.connect(
+      host = "localhost",
+      user = "root",
+      password = "1"
+      #database = "mydatabase"
+    )
+    # creating an instance of 'cursor' class which is used to execute the 'SQL' statements in 'Python'
+    mycursor = mydb.cursor()
+    #creating a databse called 'dbtest'
+    #'execute()' method is used to compile a 'SQL' statement
+    #below statement is used to create tha 'dbtest' database
+    mycursor.execute("CREATE DATABASE dbtest")
 
+    #return mydb
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print("Hi, {0}".format(name))  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def insert_db(val):
+    mydb = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="1",
+        database = "dbtest"
+    )
+    mycursor = mydb.cursor()
+    # creating a table called 'users' in the 'datacamp' database
+    mycursor.execute("CREATE TABLE tasks (task VARCHAR(255) )")
+    sql = "INSERT INTO tasks (task) VALUES (%s)"
+    #val = val.decode('utf-8')
+    mycursor.execute(sql, val)
+    mydb.commit()
+    print(mycursor.rowcount, "record inserted.")
