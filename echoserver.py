@@ -20,6 +20,21 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             data = conn.recv(1024)
             if not data:
                 break
-            main.insert_db(data)
-            conn.sendall(data)
-
+            rec_data = data.decode()
+            if rec_data[0] == '1':
+                main.insert_db(data)
+                conn.sendall(data)
+            elif rec_data[0] == '2':
+                main.delete_from_db(data)
+                conn.sendall(data)
+            elif rec_data[0] == '3':
+                main.update_record_table(data)
+                conn.sendall(data)
+            elif rec_data[0] == '4':
+                main.print_all_table()
+                conn.sendall(data)
+            elif rec_data[0] == '5':
+                main.close_all()
+                conn.sendall(data)
+            else:
+                break
