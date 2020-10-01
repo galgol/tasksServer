@@ -22,18 +22,24 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 break
             rec_data = data.decode() #get request from client according to menu bar
             if rec_data[0] == '1':
-                main.insert_db(data)
+                main.read_available_tasks(data)
                 conn.sendall(data)
             elif rec_data[0] == '2':
-                main.delete_from_db(data)
+                main.addTo_available_tasks(data)
                 conn.sendall(data)
             elif rec_data[0] == '3':
-                main.update_record_table(data)
+                main.insert_db(data)
                 conn.sendall(data)
             elif rec_data[0] == '4':
-                main.print_all_table()
+                main.delete_from_db(data)
                 conn.sendall(data)
             elif rec_data[0] == '5':
+                main.update_record_table(data) #change to list_of_tasks
+                conn.sendall(data)
+            elif rec_data[0] == '6': #change print to join tables!
+                main.print_all_table()
+                conn.sendall(data)
+            elif rec_data[0] == '7':
                 main.close_all()
                 conn.sendall(data)
             else:
