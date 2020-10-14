@@ -25,7 +25,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 main.read_available_tasks(data)
                 conn.sendall(data)
             elif rec_data[0] == '2':
-                main.addTo_available_tasks(data)
+                main.add_to_available_tasks(data)
                 conn.sendall(data)
             elif rec_data[0] == '3':
                 main.insert_db(data)
@@ -34,9 +34,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 main.delete_from_db(data)
                 conn.sendall(data)
             elif rec_data[0] == '5':
-                main.update_record_table(data) #change to list_of_tasks
+                main.update_record_table(data)
                 conn.sendall(data)
-            elif rec_data[0] == '6': #change print to join tables!
+            elif rec_data[0] == '6':
                 main.print_all_table()
                 conn.sendall(data)
             elif rec_data[0] == '7':

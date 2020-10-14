@@ -38,7 +38,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         elif chosen_action == '5':
             old_task = input("insert the task ID you want to update (in available options)")
             new_task = input("insert new description of task (to available options)")
-            s.sendall(bytes(chosen_action + ' ' + old_task + '#' + new_task, 'utf-8'))
+            s.sendall(bytes(chosen_action + ' ' + old_task + '#' + new_task, 'utf-8')) # the '#' helps distingush old and new
             data = s.recv(1024)
             print('Received task to server\n', data)
         elif chosen_action == '6':
